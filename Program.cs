@@ -4,12 +4,16 @@ int numberM = int.Parse(Console.ReadLine());
 Console.WriteLine("Задайте начальное число N:");
 int numberN = int.Parse(Console.ReadLine());
 
-int AckermannFunction (int numberM, int numberN)
+///Метод нахождения суммы натуральных элементов в промежутке от M до N
+void GapNumberSum (int numberM, int numberN, int sum)
 {
-    if (numberM == 0) return numberN + 1;
-    if (numberM != 0 && numberN == 0) return AckermannFunction(numberM - 1, 1);
-    if (numberM > 0 && numberN > 0) return AckermannFunction(numberM - 1, AckermannFunction(numberM, numberN - 1));
-return AckermannFunction(numberM, numberN);
+    if (numberM > numberN) 
+    {
+        Console.WriteLine($"Сумма натуральных чисел в от M до N: {sum}"); 
+        return;
+    }
+    sum = sum + (numberM++);
+    GapNumberSum(numberM, numberN, sum);
 }
 
-Console.WriteLine($"Функция Аккермана для чисел A({numberM},{numberN}) = {AckermannFunction(numberM, numberN)}");
+GapNumberSum(numberM, numberN, 0);
